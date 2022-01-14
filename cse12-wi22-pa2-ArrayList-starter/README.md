@@ -1,3 +1,3 @@
-# CSE 12 Winter 2022 PA2
+This is where PA2 is stored.
 
-Writeup: https://docs.google.com/document/d/1Je-9HpFo4g9-Cxqb07armFIoLRBOAF0WT4sB0fWBnwA/edit?usp=sharing
+This project required us to implement an ArrayList using an array.
