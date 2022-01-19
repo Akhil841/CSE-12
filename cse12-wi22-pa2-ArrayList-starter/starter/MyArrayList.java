@@ -8,15 +8,17 @@
  */
 
 public class MyArrayList<E> implements MyList<E> {
+    public static final int DEFAULT_CAPACITY = 5;
+    public static final int DEFAULT_SIZE = 0;
 	//store data in instance variable
     public Object[] data;
     //store size in instance variable
     public int size;
     //no-arg constructor
     public MyArrayList() {
-    	//data array should have capacity 5 and size 0 since it has nothing
-        data = new Object[5];
-        size = 0;
+    	//data array should have default capacity and size since it has nothing
+        data = new Object[DEFAULT_CAPACITY];
+        size = DEFAULT_SIZE;
     }
     //constructor with initial capacity argument
     public MyArrayList(int initialCapacity) {
@@ -24,14 +26,14 @@ public class MyArrayList<E> implements MyList<E> {
         if (initialCapacity < 0) throw new IllegalArgumentException();
         //data should have capacity of the input capacity and size 0 since it has nothing
         data = new Object[initialCapacity];
-        size = 0;
+        size = DEFAULT_SIZE;
     }
     //constructor with initial array argument
     public MyArrayList(E[] arr) {
     	//if the array is null use the default constructor
         if (arr == null) {
-        	data = new Object[5];
-            size = 0;
+        	data = new Object[DEFAULT_CAPACITY];
+            size = DEFAULT_SIZE;
         }
         //data should have the array's contents and have the same size as the array since it has
         //all of the array's contents
@@ -64,8 +66,8 @@ public class MyArrayList<E> implements MyList<E> {
         //if the data set is empty
         else {
         	//make data a new array of size being the maximum
-        	//of requiredCapacity and 5
-            data = new Object[Math.max(requiredCapacity, 5)];
+        	//of requiredCapacity and the default capacity
+            data = new Object[Math.max(requiredCapacity, DEFAULT_CAPACITY)];
         }
     }
     //get the capacity of the ArrayList
