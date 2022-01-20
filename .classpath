@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="cse12-wi22-pa1-RPS-starter/starter"/>
+	<classpathentry kind="src" path="cse12-wi22-pa2-ArrayList-starter/starter"/>
+	<classpathentry kind="src" path="cse12-wi22-pa3-LinkedList-starter"/>
+	<classpathentry kind="lib" path="cse12-wi22-pa1-RPS-starter/libs/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="cse12-wi22-pa1-RPS-starter/libs/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="cse12-wi22-pa2-ArrayList-starter/libs/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="cse12-wi22-pa2-ArrayList-starter/libs/junit-4.12.jar"/>
+	<classpathentry kind="output" path="cse12-wi22-pa1-RPS-starter/bin"/>
+</classpath>

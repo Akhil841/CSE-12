@@ -1,22 +1,29 @@
 /**
- * TODO: Add your file header
- * Name:
- * Email:
- * Sources used: Put "None" if you did not have any external help
+ * Name: Akhil Pillai
+ * Email: avpillai@ucsd.edu
+ * Sources used: None
  * 
  * 2-4 sentence file description here
+ * 
+ * This file contains my implementation of a
+ * LinkedList, as well as the provided Node class.
  */
 
 import java.util.AbstractList;
 
 /** 
- * TODO: Add class header here 
+ * Implementation of a LinkedList.
+ * Functions similarly to a java.util.LinkedList,
+ * but cannot store null values.
  */
 
 public class MyLinkedList<E> extends AbstractList<E> {
 
+	//stores LL size
 	int size;
+	//sentinel/dummy head node of LL
 	Node head;
+	//sentinel/dummy tail node of LL
 	Node tail;
 
 	/**
@@ -89,49 +96,125 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
 	//  Implementation of the MyLinkedList Class
 	/** Only 0-argument constructor is defined */
+	//initializes empty LL with sentinel nodes
 	public MyLinkedList() {
+		//initialize head and tail
+		head = new Node(null);
+		tail = new Node(null);
+		//set head.prev to null (since it is the first node) and head.next to tail (since list is empty)
+		head.setPrev(null);
+		head.setNext(tail);
+		//set tail.prev to head (since list is empty) and tail.next to null (since it is the last node)
+		tail.setPrev(head);
+		tail.setNext(null);
 		/* Add your implementation here */
-		// TODO
 	}
-
+	//Returns the size of the LL
 	@Override
 	public int size() {
-		// need to implement the size method
-		return 0; // TODO
+		// return size variable that is updated by the methods
+		return size;
 	}
 
 	@Override
 	public E get(int index) {
-		return (E) null;  // TODO
+		//use getNth helper method to get Node at the given index
+		//return the element at that specific Node
+		return getNth(index).getElement();
 	}
-
+	//Adds the provided data to the LL in a new node,
+	//adjusting the pointers accordingly.
 	@Override
 	public void add(int index, E data) {
-		/* Add your implementation here */
-		// TODO
+		//Only non-null data can be added
+		if (data == null) throw new NullPointerException();
+		//Get the node to the left of the new node, if index > 0.
+		//Use the head otherwise.
+		Node pNode;
+		if (index > 0) pNode = getNth(index-1);
+		else pNode = head;
+		//Get the node to the right of the new node.
+		Node nNode = getNth(index);
+		//Create a new node with the provided data.
+		Node newNode = new Node(data);
+		//Change the pointers of the node on the left and right of the new node so they point
+		//towards the new node.
+		pNode.setNext(newNode);
+		nNode.setPrev(newNode);
+		//Increment size by 1 since a new element was added.
+		size++;
 	}
-
+	
+	//Appends a new element to the end of the LL
 	public boolean add(E data) {
-		return true; // TODO
+		//Use the above add(int, E), with the index parameter being the end of the list
+		add(size, data);
+		//always returns true
+		return true;
 	}
 
+	//Sets the provided data into the node at the provided index, 
+	//and returns the overwritten data.
 	public E set(int index, E data) {
-		return (E) null; // TODO
+		//Only non-null data may be inserted.
+		if (data == null) throw new NullPointerException();
+		//Get a reference to the node to be edited.
+		Node setMe = getNth(index);
+		//Get the value to return
+		E output = setMe.getElement();
+		//Change the value of the given node to the value of the new node.
+		setMe.setElement(data);
+		//Return the overwritten data.
+		return output;
 	}
-
+	//Removes the node at the provided index from the LL,
+	//and returns its data.
 	public E remove(int index) {
-		return (E) null; // TODO
+		//Get the element to return
+		E output = getNth(index).getElement();
+		//Get the node to the left of the node to be removed, if index > 0.
+        //Use the head otherwise.
+		Node pNode;
+		if (index > 0) pNode = getNth(index-1);
+		else pNode = head;
+		//Get the node to the right of the node to be removed.
+		Node nNode = getNth(index+1);
+		//Modify the nodes to the left and right of the node to be removed 
+		//so they point to each other, effectively putting
+		//the node to be removed outside of the LL.
+		pNode.setNext(nNode);
+		nNode.setPrev(pNode);
+		//Decrement size by 1 since a node was removed.
+		size--;
+		//Return the removed data.
+		return output;
 	}
-
+	//Removes all data from the LL.
 	public void clear() {
-		/* Add your implementation here */
+		//Point the head and tail at each other, so all data 
+		//in the list is effectively removed.
+		head.setNext(tail);
+		tail.setPrev(head);
+		//Set size to 0 since list is now empty.
+		size = 0;
 	}
-
+	//Returns true if the LL has no elements, false otherwise.
 	public boolean isEmpty() {
-		return true;  // TODO
+		//Return true if the size is 0, false otherwise.
+		return size == 0;
 	}
-
+	//Gets the node at the provided index.
 	protected Node getNth(int index) {
-		return (Node) null;  // TODO
+		//Only existing elements may be accessed.
+		if (index < 0 || index > size) throw new IndexOutOfBoundsException();
+		//Start at the first node with a value.
+		Node curNode = head.next;
+		//Traverse the LL to the requested index.
+		for (int i = 0; i < index; i++) {
+			//In each iteration, traverse the list by 1.
+			curNode = curNode.next;
+		}
+		//Return the node found at the provided index.
+		return curNode;
 	}
 }
