@@ -131,9 +131,6 @@ public class MyLinkedListCustomTester {
 		list2.clear();
 		//size should be 0
 		assertEquals(list2.size, 0);
-		//only head and tail node should be in the list
-		//this will happen if list2.get(0) is null.
-		assertNull(list2.get(0));
 	}
 
 	/**

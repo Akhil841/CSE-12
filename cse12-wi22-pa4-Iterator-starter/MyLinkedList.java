@@ -5,12 +5,13 @@
  * 
  * 2-4 sentence file description here
  * 
- * This file contains my implementation of a
- * LinkedList, as well as the provided Node class.
+ * This file contains my implementation of a LinkedList, as well as the provided Node class.
+ * This file also contains my implementation of an Iterator.
  */
 
 import java.util.AbstractList;
-
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 /** 
  * Implementation of a LinkedList.
  * Functions similarly to a java.util.LinkedList,
@@ -221,5 +222,101 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		}
 		//Return the node found at the provided index.
 		return curNode;
+	}
+	protected class MyListIterator implements ListIterator<E> {
+		Node left;
+		Node right;
+		int idx;
+		boolean forward;
+		boolean canRemoveOrSet;
+		public MyListIterator() {
+			left = head;
+			right = head.getNext();
+			idx = 0;
+			forward = true;
+			canRemoveOrSet = false;
+		}
+
+		public boolean hasNext() {
+			return right != tail;
+		}
+
+		public E next() {
+			if (!hasNext()) throw new NoSuchElementException();
+			left = right;
+			right = right.getNext();
+			idx++;
+			forward = true;
+			canRemoveOrSet = true;
+			return left.getElement();
+		}
+
+		public boolean hasPrevious() {
+			return left != head;
+		}
+
+		public E previous() {
+			if (!hasPrevious()) throw new NoSuchElementException();
+			right = left;
+			left = left.getPrev();
+			idx--;
+			forward = false;
+			canRemoveOrSet = true;
+			return right.getElement();
+		}
+
+		public int nextIndex() {
+			return idx;
+		}
+
+		public int previousIndex() {
+			return (!hasPrevious()) ? -1 : idx - 1;
+		}
+
+		public void add(E element) {
+			if (element == null) throw new NullPointerException();
+			Node newNode = new Node(element);
+			left.setNext(newNode);
+			right.setPrev(newNode);
+			newNode.setPrev(left);
+			newNode.setNext(right);
+			left = newNode;
+			idx++;
+			canRemoveOrSet = false;
+		}
+
+		public void set(E element) {
+			if (!canRemoveOrSet) throw new IllegalStateException();
+			if (element == null) throw new NullPointerException();
+			Node setThis = new Node(element);
+			if (forward) {//set left
+				Node previous = left.getPrev();
+				left = setThis;
+				left.setPrev(previous);
+				left.setNext(right);
+			}
+			else {//set right
+				Node next = left.getNext();
+				right = setThis;
+				right.setPrev(left);
+				right.setNext(next);
+			}
+		}
+
+		public void remove() {
+			if (!canRemoveOrSet) throw new IllegalStateException();
+			if (forward) {//remove left
+				left = left.getPrev();
+				left.setNext(right);
+				right.setPrev(left);
+			}
+			else {//remove right
+				right = right.getNext();
+				left.setNext(right);
+				right.setPrev(left);
+			}
+			if (forward) idx--;
+			canRemoveOrSet = false;
+		}
 	}
 }
