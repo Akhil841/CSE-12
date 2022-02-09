@@ -135,9 +135,11 @@ public class MyLinkedList<E> implements MyReverseList<E>{
      */
     public void reverseRegion(int fromIndex, int toIndex){
         //throw exception if attempting to access nonexistent parts of the LinkedList
-        if (fromIndex < 0 || toIndex > size) throw new IndexOutOfBoundsException();
+        if (fromIndex < 0 || toIndex >= size) throw new IndexOutOfBoundsException();
+        //do nothing if fromIndex is greater than or equal to toIndex
+        if (fromIndex >= toIndex) return;
         //swap data from end to end and ending at the middle
-        for (int i = 0; i < (toIndex - fromIndex)/2; i++) {
+        for (int i = 0; i < (toIndex - fromIndex)/2 + 1; i++) {
             E temp = getNth(toIndex - i).data;
             getNth(toIndex - i).data = getNth(fromIndex + i).data;
             getNth(fromIndex + i).data = temp;
