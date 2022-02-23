@@ -66,7 +66,7 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
     // (up, right, down, left)
     private final int[][] NEIGHBOR_ORDER = { { -1, 0 }, { 0, 1 },
             { 1, 0 }, { 0, -1 } };
-
+    
     // Colors used for the cells
     private final Color COLOR_EMPTY = Color.DARK_GRAY;
     private final Color COLOR_START = Color.YELLOW;
@@ -612,6 +612,14 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
                 { EMP, EMP, EMP, EMP, EMP, EMP, EMP, EMP, EMP, EMP },
         };
 
+        String[][] preset4 = {
+            { EMP, EMP, EMP, EMP, EMP },
+            { EMP, EMP, WAL, WAL, EMP },
+            { EMP, WAL, EMP, EMP, EMP },
+            { EMP, WAL, WAL, EMP, EMP },
+            { EMP, EMP, EMP, EMP, FIN }
+        };
+
         // Check for correct number of valid arguments
         if (args.length < MIN_ARGS) {
             System.out.println("Invalid arguments.");
@@ -634,6 +642,9 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
                 break;
             case 3:
                 maze = preset3;
+                break;
+            case 4:
+                maze = preset4;
                 break;
             default:
                 maze = preset1;

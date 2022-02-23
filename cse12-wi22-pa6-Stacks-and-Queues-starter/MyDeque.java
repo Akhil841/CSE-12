@@ -97,9 +97,7 @@
         data[index] = element;
         //update instance variables
         size++;
-        front--;
-        //circular behavior
-        if (front < 0) front += data.length;
+        front = index;
     }
 
     /**
@@ -126,7 +124,8 @@
         data[(rear + 1) % data.length] = element;
         //update instance variables
         size++;
-        rear++;
+        //circular behavior
+        rear = (rear + 1) % data.length;
     }
 
     /**
@@ -143,7 +142,7 @@
         //remove value from array
         data[front] = null;
         //update instance variables
-        front = (front + 1) % size;
+        front = (front + 1) % data.length;
         size--;
         //return removed value
         return output;
@@ -160,10 +159,11 @@
         if (size == 0) return null;
         //get return data
         output = (E) data[rear];
+        //remove value from array
         data[rear] = null;
         //update instance variables
-        rear = (rear - 1) % size;
-        if (rear < 0) rear += size;
+        rear = (rear - 1) % data.length;
+        if (rear < 0) rear += data.length;
         size--;
         //return removed value
         return output;

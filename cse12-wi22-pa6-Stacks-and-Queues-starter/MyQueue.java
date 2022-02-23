@@ -76,5 +76,4 @@ public class MyQueue<E> implements QueueInterface<E> {
     public int size() {
         return theQueue.size();
     }
-
 }
