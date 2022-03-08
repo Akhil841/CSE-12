@@ -153,14 +153,14 @@ public class CustomTester {
         try {
             cal.book(-1, 6);
         }
-        catch (IllegalStateException e) {
+        catch (IllegalArgumentException e) {
             assertEquals("Size should be unchanged after bad booking", 
                 0, cal.calendar.size());
         }
         try {
             cal.book(6, 5);
         }
-        catch (IllegalStateException e) {
+        catch (IllegalArgumentException e) {
             assertEquals("Size should be unchanged after bad booking", 
                 0, cal.calendar.size());
         }

@@ -36,7 +36,7 @@ public class MyCalendar {
      */
     public boolean book(int start, int end) {
         //exception handling
-        if (start < 0 || start >= end) throw new IllegalStateException();
+        if (start < 0 || start >= end) throw new IllegalArgumentException();
         //get all the bookings in order
         ArrayList<MyBST.MyBSTNode<Integer, Integer>> preStarts = calendar.inorder();
         //store the start times of all the bookings
