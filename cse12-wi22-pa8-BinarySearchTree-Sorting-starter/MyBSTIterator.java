@@ -1,6 +1,21 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * An iterator for the BST.
+ * Name: Akhil Pillai
+ * PID: A16724533
+ * Email: avpillai@ucsd.edu
+ * Sources used: None
+ * 
+ * Contains an iterator for my implementation of a binary search tree.
+ * The iterator can iterate through the tree, as well as remove nodes.
+ */
+
+/**
+ * Contains an abstract class for an iterator for a binary search tree.
+ * Also contains a key iterator and a value iterator that implement this class.
+ */
 public class MyBSTIterator<K extends Comparable<K>, V> extends MyBST<K, V> {
     abstract class MyBSTNodeIterator<T> implements Iterator<T> {
         MyBSTNode<K, V> next;
@@ -26,26 +41,48 @@ public class MyBSTIterator<K extends Comparable<K>, V> extends MyBST<K, V> {
             return next != null;
         }
 
+        /**
+         * Returns the inorder next node in this BST.
+         * @return the inorder next node in this BST
+         * @throws NoSuchElementException if there is no
+         * next node
+         */
         MyBSTNode<K, V> nextNode() {
-            // TODO
-            return null;
+            //throw exception if the iterator cannot go forward
+            if (!hasNext()) throw new NoSuchElementException();
+            //move the iterator forward by one
+            //store the next node in a variable
+            //to store the output
+            MyBSTNode<K, V> output = next;
+            //shift next to its successor
+            next = next.successor();
+            //set the last visited node to
+            //what we will output
+            //since it is the lastest node returned
+            lastVisited = output;
+            //return the found value
+            return output;
         }
 
         /**
-         * TODO: add inline comments for this method to demonstrate your
-         *   understanding of this method.
-         *
          * This method removes the last visited node from the tree.
+         * @throws IllegalStateException if their is no last visited node;
+         * if the iterator has not been used
          */
         public void remove() {
+            //if lastVisited is null throw an exception
             if (lastVisited == null) {
                 throw new IllegalStateException();
             }
+            //move the iterator back by one node if lastVisited is a leaf
             if (lastVisited.getRight() != null &&
                     lastVisited.getLeft() != null) {
                 next = lastVisited;
             }
+            //remove the last visited node from the array
             MyBSTIterator.this.remove(lastVisited.getKey());
+            //set lastVisited to null since no nodes were visited since
+            //the removal
             lastVisited = null;
         }
     }
