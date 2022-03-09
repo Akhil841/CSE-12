@@ -138,7 +138,7 @@ public class MyBST<K extends Comparable<K>,V>{
      * @param key The key to search the BST for.
      * @param node The node to start searching at.
      * @return The node whose key is equal to key, or null
-     * if key is null or there is no such node in the BST>
+     * if key is null or there is no such node in the BST
      */
     private MyBSTNode<K, V> nodeSearchHelper(K key, MyBSTNode<K, V> node) {
         //return null if key is null

@@ -37,43 +37,29 @@ public class MyCalendar {
     public boolean book(int start, int end) {
         //exception handling
         if (start < 0 || start >= end) throw new IllegalArgumentException();
-        //get all the bookings in order
-        ArrayList<MyBST.MyBSTNode<Integer, Integer>> preStarts = calendar.inorder();
-        //store the start times of all the bookings
-        ArrayList<Integer> starts = new ArrayList<>();
-        //store the end times of all the bookings
-        ArrayList<Integer> ends = new ArrayList<>();
-        //for each existing booking
-        for (int i = 0; i < preStarts.size(); i++) {
-            //add the start time to the start list
-            starts.add(preStarts.get(i).getKey());
-            //add the end time to the end list
-            ends.add(preStarts.get(i).getValue());
-        }
-        //store whether insertion is successful here
         boolean insertable = true;
-        //for each start time
-        for (int i = 0; i < starts.size(); i++) {
-            //if the new booking's start is between the start and the end
-            //of an existing booking
-            if (starts.get(i) <= start && start < ends.get(i)) {
-                //return false since these would be conflicting times
+        //if the booking is within the closest booking to that booking
+        if (calendar.floorKey(start) != null) {
+            if (calendar.floorKey(start) <= start && start < calendar.get(calendar.floorKey(start)))
+                //return false
                 insertable = false;
-                //break out of the for loop for efficiency
-                break;
-            }
-            //if the new booking's end is between the start and the end
-            //of an existing booking
-            if (starts.get(i) < end && end <= ends.get(i)) {
-                //return false since these would be conflicting times
-                insertable = false;
-                //break out of the for loop for efficiency
-                break;
-            }
         }
-        //insert booking into the calendar if possible
-        if (insertable) calendar.insert(start, end);
-        //return whether insertion was successful
+        //we check both start and end, for both floor and ceiling, if they exist
+        if (calendar.ceilingKey(start) != null) {
+            if (calendar.ceilingKey(start) <= start && start < calendar.get(calendar.ceilingKey(start)))
+                insertable = false;
+        }
+        if (calendar.floorKey(end) != null) {
+            if (calendar.floorKey(end) < end && end <= calendar.get(calendar.floorKey(end)))
+                insertable = false;
+        }
+        if (calendar.ceilingKey(end) != null) {
+            if (calendar.ceilingKey(end) < end && end <= calendar.get(calendar.ceilingKey(end)))
+                insertable = false;
+        }
+        //book if possible
+        if (insertable) calendar.put(start, end);
+        //and return whether the booking was successful
         return insertable;
     }
 
