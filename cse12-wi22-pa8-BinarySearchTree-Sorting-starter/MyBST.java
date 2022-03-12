@@ -49,9 +49,9 @@ public class MyBST<K extends Comparable<K>,V>{
             return null;
         }
         //if the value will replace another value
-        if (search(key) != null) {
+        if (nodeSearch(key) != null) {
             //find the value that it will replace
-            V output = search(key);
+            V output = nodeSearch(key).getValue();
             //set the node that it will replace
             //to a new node with the inserted value
             MyBSTNode<K, V> replace = nodeSearch(key);
