@@ -1,9 +1,12 @@
 /**
- * TODO: Add file header
- * Name:
- * ID:
- * Email:
+ * Name: Akhil Pillai
+ * ID: A16724533
+ * Email: avpillai@ucsd.edu
  * File description: 
+ * Contains an implementation of an "N-ary" tree, 
+ * as described in the final's specification.
+ * An N-ary tree is a generalized form of a binary tree 
+ * where a node can have up to N children.
  */
 
 import java.util.List;
@@ -13,7 +16,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
- * TODO: Add class header
+ * Contains the N-ary tree implementation.
+ * The tree has add, contains, and sortTree methods.
  */
 public class CSE12NaryTree<E extends Comparable<E>> {
     
@@ -156,7 +160,10 @@ public class CSE12NaryTree<E extends Comparable<E>> {
     }
 
     /**
-     * TODO: Add method header
+     * Uses a PriorityQueue to return the contents of the tree
+     * in sorted order.
+     * @return An ArrayList that contains the contents of the
+     * N-ary tree, in sorted order.
      */
     public ArrayList<E> sortTree(){
         ArrayList<E> out = new ArrayList<>();

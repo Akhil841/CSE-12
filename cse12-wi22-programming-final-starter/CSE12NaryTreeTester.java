@@ -1,9 +1,10 @@
 /**
- * TODO: Add file header
- * Name:
- * ID:
- * Email:
- * File description: 
+ * Name: Akhil Pillai
+ * ID: A16724533
+ * Email: avpillai@ucsd.edu
+ * File description: Contains various tests for the N-ary
+ * tree's methods.
+ * Three of the tests are provided and one is custom.
  */
  
 import static org.junit.Assert.*;
@@ -11,7 +12,8 @@ import org.junit.*;
 import java.util.*;
 
 /**
- * TODO: Add class header
+ * This class contains tests for the N-ary tree.
+ * It tests the add, contains, and sortTree methods.
  */
 public class CSE12NaryTreeTester {
     CSE12NaryTree<Integer> ds;
@@ -30,7 +32,8 @@ public class CSE12NaryTreeTester {
         ds.size = 6;
     }
     /**
-     * TODO: Add test case description.
+     * Tests the add method on a 5-ary tree that already 
+     * contains only a root node and its 5 children nodes.
      */
     @Test
     public void testAdd(){
@@ -41,7 +44,8 @@ public class CSE12NaryTreeTester {
     }
 
     /**
-     * TODO: Add test case description
+     * Tests the contains method on a 5-ary tree when 
+     * the element is not present in it.
      */
     @Test
     public void testContains(){
@@ -50,7 +54,8 @@ public class CSE12NaryTreeTester {
     }
 
     /**
-     * TODO: Add test case description
+     * Tests the sortTree method on a 5-ary tree 
+     * that contains only the root node.
      */
     @Test
     public void testSortTree(){
