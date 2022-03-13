@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="cse12-wi22-pa1-RPS-starter/libs/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="cse12-wi22-pa2-ArrayList-starter/libs/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="cse12-wi22-pa2-ArrayList-starter/libs/junit-4.12.jar"/>
+	<classpathentry kind="src" path="cse12-wi22-pa7-Heaps-and-Priority-Queue-Starter"/>
+	<classpathentry kind="src" path="cse12-wi22-pa8-BinarySearchTree-Sorting-starter"/>
 	<classpathentry kind="output" path="cse12-wi22-pa1-RPS-starter/bin"/>
 </classpath>

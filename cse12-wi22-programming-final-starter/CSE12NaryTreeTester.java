@@ -85,4 +85,45 @@ public class CSE12NaryTreeTester {
         populateDS();
         ds.add(null);
     }
+
+    /**
+     * Test the add method on the following tree:
+     * 
+     *                                      5
+     *                 7          3         12          21        2
+     *      13 28 55 37 40
+     * The size should increase and the added node should be in the correct location
+     * (i.e. it should be the first child of 3)
+     */
+    @Test
+    public void testAddExpanded() {
+        populateDS();
+        CSE12NaryTree<Integer>.Node childNode = ds.root.children.get(0);
+        childNode.addChild(ds.new Node(13));
+        childNode.addChild(ds.new Node(28));
+        childNode.addChild(ds.new Node(55));
+        childNode.addChild(ds.new Node(37));
+        childNode.addChild(ds.new Node(40));
+        ds.size = 11;
+        ds.add(90);
+        assertEquals("Size should increase", 12, ds.size);
+        assertSame("Node should be in correct location", 90, ds.root.children.get(1).children.get(0).data);
+    }
+
+    /**
+     * Tests sortTree on a populated list.
+     */
+    @Test
+    public void testSortPopulated() {
+        populateDS();
+        ArrayList<Integer> actual = ds.sortTree();
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(2);
+        expected.add(3);
+        expected.add(5);
+        expected.add(7);
+        expected.add(12);
+        expected.add(21);
+        assertEquals(expected, actual);
+    }
 }

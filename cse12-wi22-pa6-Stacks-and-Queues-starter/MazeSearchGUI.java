@@ -620,6 +620,13 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
             { EMP, EMP, EMP, EMP, FIN }
         };
 
+        String[][] preset5 = {
+            { EMP, EMP, WAL, EMP },
+            { EMP, WAL, EMP, EMP },
+            { EMP, EMP, EMP, WAL },
+            { EMP, EMP, EMP, FIN }
+        };
+
         // Check for correct number of valid arguments
         if (args.length < MIN_ARGS) {
             System.out.println("Invalid arguments.");
@@ -645,6 +652,9 @@ public class MazeSearchGUI extends JFrame implements ActionListener {
                 break;
             case 4:
                 maze = preset4;
+                break;
+            case 5:
+                maze = preset5;
                 break;
             default:
                 maze = preset1;

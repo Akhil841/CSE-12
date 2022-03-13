@@ -233,6 +233,7 @@ public class MyMinHeap<E extends Comparable<E>> implements MinHeapInterface <E>{
                 //percolate it down
                 percolateDown(index);
             }
+            percolateDown(index);
             //return the removed value
             return output;
         }

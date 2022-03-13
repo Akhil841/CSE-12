@@ -110,19 +110,29 @@ public class CSE12NaryTree<E extends Comparable<E>> {
      * @throws NullPointerException if element is null
      */
     public void add(E element) {
+        //only non-null elements may be added
         if (element == null) throw new NullPointerException();
+        //if the the tree is empty
         if (root == null) {
+            //make the root a new node containing
+            //the element
             root = new Node(element);
+            //update size
             size++;
+            //break from method
             return;
         }
+        //get all nodes in level order
         ArrayList<Node> allNodes = LOTraverse();
+        //add a new node with element
+        //to the first node that can take new nodes
         for (Node node : allNodes) {
             if (node.getNumChildren() < N) {
                 node.addChild(new Node(element));
                 break;
             }
         }
+        //increment size
         size++;
     }
 
@@ -132,17 +142,30 @@ public class CSE12NaryTree<E extends Comparable<E>> {
      * @return an ArrayList containing all the nodes in level order
      */
     private ArrayList<Node> LOTraverse() {
+        //instantiate ArrayList to store level-order traversal
+        //(is empty to account for an empty tree)
         ArrayList<Node> out = new ArrayList<>();
+        //Create a queue to traverse the data in level order
         Queue<Node> nodeQueue = new LinkedList<>();
+        //enqueue the root to begin the level-order traversal
         nodeQueue.add(root);
-        while (nodeQueue.size() != 0) {
+        //while there is still elements in the queue
+        while (nodeQueue.size() > 0) {
+            //dequeue once
             Node currNode = nodeQueue.poll();
-            if (currNode != null) out.add(currNode);
-            List<Node> children = currNode.getChildren();
-            for (int i = 0; i < children.size(); i++) {
-                nodeQueue.add(children.get(i));
+            //if a node was dequeued
+            if (currNode != null) {
+                //add it to the list
+                out.add(currNode);
+                //and enqueue all of its children
+                List<Node> children = currNode.getChildren();
+                for (Node child : children) {
+                    nodeQueue.add(child);
+                }
             }
         }
+        //after it's all done, the list should be traversed
+        //in level order
         return out;
     }
 
@@ -152,10 +175,13 @@ public class CSE12NaryTree<E extends Comparable<E>> {
      * @throws NullPointerException if element is null
      */
     public boolean contains(E element) {
+        //get all nodes in list
         ArrayList<Node> allNodes = LOTraverse();
-        for (int i = 0; i < allNodes.size(); i++) {
-            if (allNodes.get(i).data == element) return true;
+        //if any node contains the element return true
+        for (Node node : allNodes) {
+            if (node.data == element) return true;
         }
+        //none of them do, so return false
         return false;
     }
 
@@ -166,15 +192,22 @@ public class CSE12NaryTree<E extends Comparable<E>> {
      * N-ary tree, in sorted order.
      */
     public ArrayList<E> sortTree(){
+        //Store output of sorting in this list
         ArrayList<E> out = new ArrayList<>();
+        //Get all nodes
         ArrayList<Node> unsortedNodes = LOTraverse();
+        //Create priority queue to sort the data
         PriorityQueue<E> pQueue = new PriorityQueue<E>();
-        for (int i = 0; i < unsortedNodes.size(); i++) {
-            pQueue.add(unsortedNodes.get(i).data);
+        //add all the nodes to the priority queue
+        for (Node node : unsortedNodes) {
+            pQueue.add(node.data);
         }
+        //dequeue all elements from the priority queue
+        //and add them to the array list
         while (pQueue.size() > 0) {
             out.add(pQueue.poll());
         }
+        //return the sorted data
         return out;
     }
 }

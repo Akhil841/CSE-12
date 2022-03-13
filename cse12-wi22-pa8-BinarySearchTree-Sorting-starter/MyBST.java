@@ -327,6 +327,14 @@ public class MyBST<K extends Comparable<K>,V>{
         return inorderHelper(this.root);
     }
 
+    public void cse12T(MyBSTNode<K, V> n) {
+        if (n == null) return;
+        System.out.print(n.value + " ");
+        cse12T(n.left);
+        cse12T(n.right);
+        cse12T(n.left);
+    }
+
     /**
      * Returns an ArrayList of nodes that form
      * an inorder traversal of the BST, starting at node.
